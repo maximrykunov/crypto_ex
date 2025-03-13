@@ -6,12 +6,16 @@
   </div>
 
   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li><%= link_to 'Home', root_path, class:'nav-link px-2 link-secondary' %></li>
-    <li><%= link_to 'Blog', posts_path, class:'nav-link px-2 link-secondary' %></li>
+    <li><%= link_to 'Home', root_path, class: 'nav-link px-2 link-secondary' %></li>
+    <li><%= link_to 'Blog', posts_path, class: 'nav-link px-2 link-secondary' %></li>
   </ul>
 
   <div class="col-md-3 text-end">
-    <button type="button" class="btn btn-outline-primary me-2">Login</button>
-    <button type="button" class="btn btn-primary">Sign-up</button>
+    <% if authenticated? %>
+      <%= button_to "Log out", session_path, class: "btn btn-primary", method: :delete %>
+    <% else %>
+      <%= link_to 'Login', new_session_path, class: 'btn btn-outline-primary me-2' %>
+      <%= link_to 'Sign-up', new_registration_path, class: 'btn btn-primary' %>
+    <% end%>
   </div>
 </header>

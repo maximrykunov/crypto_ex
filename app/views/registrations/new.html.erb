@@ -1,0 +1,31 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<% if flash[:notice] %>
+  <div class="alert alert-primary" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<main class="form-signin w-100 m-auto">
+  <%= form_with model: @user, url: registration_path do |form| %>
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+    <div class="form-floating">
+      <%= form.email_field :email_address, required: true, autofocus: true, placeholder: "name@example.com", value: @user.email_address, class: "form-control" %>
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password, required: true, placeholder: "Enter your password", class: "form-control", maxlength: 72 %>
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password_confirmation, required: true, placeholder: "Confirm your password", class: "form-control", maxlength: 72 %>
+      <label for="floatingPassword">Password confirmation</label>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+  <% end %>
+</main>
