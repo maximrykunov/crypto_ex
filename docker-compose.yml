@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: app_db
+      POSTGRES_DB: crypto_ex_db
       POSTGRES_HOST: db
 
   web:
@@ -19,7 +19,6 @@ services:
     volumes:
       - ".:/app"
     environment:
-      DATABASE_URL: "postgres://postgres:password@db/app_db"
       RAILS_ENV: development
 
 volumes:
