@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   # redirect to login, if there is no current_user, meaning there is no authenticated user session
   def require_login
-    redirect_to login_path, alert: 'You must be logged in to access this page.' if current_user.nil?
+    redirect_to login_path, alert: "You must be logged in to access this page." if current_user.nil?
   end
 end
