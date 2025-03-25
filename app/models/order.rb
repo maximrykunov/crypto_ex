@@ -1,7 +1,4 @@
 class Order < ApplicationRecord
-  BASE_CURRENCIES = %w[USDT].freeze
-  QUOTE_CURRENCIES = %w[SBTC].freeze
-
   belongs_to :user
   # has_many :transactions, dependent: :nullify
 
@@ -12,11 +9,11 @@ class Order < ApplicationRecord
   validates :user, presence: true
   validates :order_type, presence: true
   validates :order_side, presence: true
-  validates :base_currency, presence: true, inclusion: { in: BASE_CURRENCIES }
+  validates :base_currency, presence: true, inclusion: { in: Settings.base_currencies }
   validates :base_address, presence: true
-  validates :quote_currency, presence: true, inclusion: { in: QUOTE_CURRENCIES }
+  validates :quote_currency, presence: true, inclusion: { in: Settings.quote_currencies }
   validates :quote_address, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: { greater_than: 0, less_than_or_equal_to: 30  }
   validates :price, numericality: { greater_than: 0 }, if: -> { order_type_limit? }
 
   def total

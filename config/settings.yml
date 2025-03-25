@@ -1,0 +1,6 @@
+usdt_wallet: ec30dd04139f94114ddb5b08bbed06d3
+base_currencies: [USDT]
+quote_currencies: [SBTC]
+
+coinmarketcap:
+  api_key: a4ebc6c6-2198-4664-8473-c7b92cdd9239

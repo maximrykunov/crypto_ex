@@ -1,0 +1,143 @@
+<script>
+  let rate = 1;
+  let commision_rate = 0.03;
+  let miner_fee = 0.000006;
+
+  document.addEventListener("DOMContentLoaded", function() {
+    function fetchExchangeRate() {
+      console.log('fetchExchangeRate')
+      fetch("/prices/fetch_price?local=true")
+        .then(response => response.json())
+        .then(data => updateExchangeRate(data.price))
+        .catch(handleError);
+    }
+
+    function updateExchangeRate(price) {
+      rate = price;
+      console.log('init', rate)
+      document.getElementById("exchange_rate").textContent = `Exchange rate: 1 USDT ~ ${price} SBTC`;
+      recalc('send');
+    }
+
+    function handleError(error) {
+      console.error("Ошибка загрузки данных:", error);
+      document.getElementById("exchange_rate").textContent = "Ошибка загрузки курса";
+    }
+
+    function recalc(source) {
+      if (source == 'send') {
+        console.log('recalc send')
+        let you_send = parseFloat(document.getElementById("you_send").value);
+        if (isNaN(you_send)) {
+          console.error("Ошибка: введено нечисловое значение.");
+        } else {
+          you_get = parseFloat((you_send * rate).toFixed(8));
+          commision = parseFloat((you_get * commision_rate).toFixed(8));
+          you_get = you_get - commision - miner_fee;
+          document.getElementById("you_get").value = you_get;
+          document.getElementById("exchange_fee").textContent = `Exchange fee: ${commision} SBTC`;
+        }
+      } else {
+        console.log('recalc get')
+        let you_get = parseFloat(document.getElementById("you_get").value);
+        if (isNaN(you_get)) {
+          console.error("Ошибка: введено нечисловое значение.");
+        } else {
+          commision = parseFloat((you_get * commision_rate).toFixed(8));
+          temp = you_get + commision + miner_fee;
+          you_send = parseFloat((temp / rate).toFixed(8));
+          document.getElementById("you_send").value = you_send;
+        }
+      }
+    }
+
+    fetchExchangeRate();
+
+    document.getElementById("you_send").addEventListener("input", function() {
+      recalc('send');
+    });
+
+    document.getElementById("you_get").addEventListener("input", function() {
+      recalc('get');
+    });
+
+    setInterval(() => fetchExchangeRate(), 10000);
+  });
+
+</script>
+
+<div class="container px-5 my-5">
+  <h2>New Exchange</h2>
+  <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= number_field_tag :you_send, @order.amount, in: 0..30, class: 'form-control', placeholder: 'You send', required: true, 'data-sb-validations': 'required' %>
+            <label for="you_send">You send</label>
+            <div class="invalid-feedback" data-sb-feedback="youSend:required">You send is required.</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= select_tag :base_currency, options_for_select(Settings.base_currencies), class: "form-select", aria: { label: "Currency" } %>
+            <label for="base_currency">Currency</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <div id="exchange_rate">Exchange rate: 1 USDT ~ 10 SBTC</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= number_field_tag :you_get, nil, class: 'form-control', placeholder: 'You send', required: true, 'data-sb-validations': 'required' %>
+            <label for="you_get">You get</label>
+            <div class="invalid-feedback" data-sb-feedback="youGet:required">You get is required.</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= select_tag :quote_currency, options_for_select(Settings.quote_currencies), class: "form-select", aria: { label: "Currency" } %>
+            <label for="quote_currency">Currency</label>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="exchange_details">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <div id="exchange_fee">Exchange fee</div>
+            <div id="network_fee">Network fee: 0.000006 SBTC</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= text_field_tag :quote_address, @order.quote_address, class: 'form-control', placeholder: 'Recipient address', required: true, 'data-sb-validations': 'required' %>
+            <label for="quote_address">Recipient address</label>
+            <div class="invalid-feedback" data-sb-feedback="youSend:required">Recipient address is required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none" id="submitSuccessMessage">
+      <div class="text-center mb-3">
+          <div class="fw-bolder">Form submission successful!</div>
+          <p>To activate this form, sign up at</p>
+          <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+      </div>
+    </div>
+    <div class="d-none" id="submitErrorMessage">
+        <div class="text-center text-danger mb-3">Error sending message!</div>
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<%# <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> %>

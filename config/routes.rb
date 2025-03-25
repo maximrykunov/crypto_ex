@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "prices/fetch_price"
+  get "orders/new"
+  get "orders/create"
   resource :session
   resource :registration, only: %i[new create]
   resources :passwords, param: :token
