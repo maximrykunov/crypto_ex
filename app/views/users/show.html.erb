@@ -1,3 +1,28 @@
 <div class="container">
   <%= "Hello, #{current_user.email_address}" %>
+
+  <h3>Your orders</h3>
+
+  <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Send</th>
+        <th>Receive</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <% current_user.orders.each do |order| %>
+      <tbody>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.send_amount %> <%= order.base_currency %></td>
+          <td><%= order.receive_amount %> <%= order.quote_currency %></td>
+          <td><%= order.status %></td>
+          <td><%= link_to 'view', order_path(order) %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
 </div>

@@ -1,116 +1,62 @@
-<script>
-  let rate = 1;
-  let commision_rate = 0.03;
-  let miner_fee = 0.000006;
+<%= turbo_stream_from "orders" %>
 
-  document.addEventListener("DOMContentLoaded", function() {
-    function fetchExchangeRate() {
-      console.log('fetchExchangeRate')
-      fetch("/prices/fetch_price?local=true")
-        .then(response => response.json())
-        .then(data => updateExchangeRate(data.price))
-        .catch(handleError);
-    }
-
-    function updateExchangeRate(price) {
-      rate = price;
-      console.log('init', rate)
-      document.getElementById("exchange_rate").textContent = `Exchange rate: 1 USDT ~ ${price} SBTC`;
-      recalc('send');
-    }
-
-    function handleError(error) {
-      console.error("Ошибка загрузки данных:", error);
-      document.getElementById("exchange_rate").textContent = "Ошибка загрузки курса";
-    }
-
-    function recalc(source) {
-      if (source == 'send') {
-        console.log('recalc send')
-        let you_send = parseFloat(document.getElementById("you_send").value);
-        if (isNaN(you_send)) {
-          console.error("Ошибка: введено нечисловое значение.");
-        } else {
-          you_get = parseFloat((you_send * rate).toFixed(8));
-          commision = parseFloat((you_get * commision_rate).toFixed(8));
-          you_get = you_get - commision - miner_fee;
-          document.getElementById("you_get").value = you_get;
-          document.getElementById("exchange_fee").textContent = `Exchange fee: ${commision} SBTC`;
-        }
-      } else {
-        console.log('recalc get')
-        let you_get = parseFloat(document.getElementById("you_get").value);
-        if (isNaN(you_get)) {
-          console.error("Ошибка: введено нечисловое значение.");
-        } else {
-          commision = parseFloat((you_get * commision_rate).toFixed(8));
-          temp = you_get + commision + miner_fee;
-          you_send = parseFloat((temp / rate).toFixed(8));
-          document.getElementById("you_send").value = you_send;
-        }
-      }
-    }
-
-    fetchExchangeRate();
-
-    document.getElementById("you_send").addEventListener("input", function() {
-      recalc('send');
-    });
-
-    document.getElementById("you_get").addEventListener("input", function() {
-      recalc('get');
-    });
-
-    setInterval(() => fetchExchangeRate(), 10000);
-  });
-
-</script>
-
-<div class="container px-5 my-5">
+<div class="container px-5 my-5" data-controller="order" data-action="connect->order#updateTotal">
   <h2>New Exchange</h2>
-  <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+  <%= form_with(model: @order, url: orders_path, method: :post, remote: true) do |f| %>
+    <%= hidden_field_tag 'order[base_address]', @order[:base_address] %>
+    <%= hidden_field_tag 'order[price]', @order[:price], data: { order_target: 'price' } %>
+    <%= hidden_field_tag 'base_commision', Settings.commision_rate, data: { order_target: 'base_commision' } %>
+    <%= hidden_field_tag 'base_miner_fee', Settings.miner_fee, data: { order_target: 'base_miner_fee' } %>
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="form-floating mb-3">
-            <%= number_field_tag :you_send, @order.amount, in: 0..30, class: 'form-control', placeholder: 'You send', required: true, 'data-sb-validations': 'required' %>
-            <label for="you_send">You send</label>
-            <div class="invalid-feedback" data-sb-feedback="youSend:required">You send is required.</div>
+            <%= text_field_tag 'order[send_amount]', @order.send_amount, class: 'form-control', placeholder: 'You send', required: true, 'data-sb-validations': 'required',  data: { order_target: 'send_amount', action: 'keyup->order#updateTotal' } %>
+            <label for="order_send_amount">You send</label>
+            <% if @order.errors[:send_amount].any? %>
+              <div class="text-danger">
+                <%= @order.errors[:send_amount].first %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="col">
           <div class="form-floating mb-3">
-            <%= select_tag :base_currency, options_for_select(Settings.base_currencies), class: "form-select", aria: { label: "Currency" } %>
-            <label for="base_currency">Currency</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-floating mb-3">
-            <div id="exchange_rate">Exchange rate: 1 USDT ~ 10 SBTC</div>
+            <%= select_tag 'order[base_currency]', options_for_select(Settings.base_currencies), class: "form-select", aria: { label: "Currency" } %>
+            <label for="order_base_currency">Currency</label>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="form-floating mb-3">
-            <%= number_field_tag :you_get, nil, class: 'form-control', placeholder: 'You send', required: true, 'data-sb-validations': 'required' %>
+            <div id="exchange_rate"><%= "Exchange rate: 1 USDT ~ #{@order.price} SBTC" %></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <%= text_field_tag :you_get, nil, class: 'form-control', placeholder: 'You send', readonly: true, 'data-sb-validations': 'required', data: { order_target: 'you_get' } %>
             <label for="you_get">You get</label>
-            <div class="invalid-feedback" data-sb-feedback="youGet:required">You get is required.</div>
+            <% if @order.errors[:receive_amount].any? %>
+              <div class="text-danger">
+                <%= @order.errors[:receive_amount].first %>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="col">
           <div class="form-floating mb-3">
-            <%= select_tag :quote_currency, options_for_select(Settings.quote_currencies), class: "form-select", aria: { label: "Currency" } %>
-            <label for="quote_currency">Currency</label>
+            <%= select_tag 'order[quote_currency]', options_for_select(Settings.quote_currencies), class: "form-select", aria: { label: "Currency" } %>
+            <label for="order_quote_currency">Currency</label>
           </div>
         </div>
       </div>
       <div class="row" id="exchange_details">
         <div class="col">
           <div class="form-floating mb-3">
-            <div id="exchange_fee">Exchange fee</div>
+            <div id="exchange_fee">Exchange fee: <span data-order-target="fee_text"></span> SBTC</div>
             <div id="network_fee">Network fee: 0.000006 SBTC</div>
           </div>
         </div>
@@ -118,26 +64,35 @@
       <div class="row">
         <div class="col">
           <div class="form-floating mb-3">
-            <%= text_field_tag :quote_address, @order.quote_address, class: 'form-control', placeholder: 'Recipient address', required: true, 'data-sb-validations': 'required' %>
-            <label for="quote_address">Recipient address</label>
-            <div class="invalid-feedback" data-sb-feedback="youSend:required">Recipient address is required.</div>
+            <%= text_field_tag 'order[quote_address]', @order.quote_address, class: 'form-control', placeholder: 'Recipient address', required: true %>
+            <label for="order_quote_address">Recipient address</label>
+            <% if @order.errors[:quote_address].any? %>
+              <div class="text-danger">
+                <%= @order.errors[:quote_address].first %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <%= check_box_tag 'order[i_agree_kyc]', true, @order.i_agree_kyc, class: 'form-check-input' %>
+              <label class="form-check-label" for="order_i_agree_kyc">I agree with KYC/AML</label>
+            </div>
+            <% if @order.errors[:i_agree_kyc].any? %>
+              <div class="text-danger">
+                <%= @order.errors[:i_agree_kyc].first %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-    <div class="d-none" id="submitSuccessMessage">
-      <div class="text-center mb-3">
-          <div class="fw-bolder">Form submission successful!</div>
-          <p>To activate this form, sign up at</p>
-          <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-      </div>
-    </div>
-    <div class="d-none" id="submitErrorMessage">
-        <div class="text-center text-danger mb-3">Error sending message!</div>
-    </div>
     <div class="d-grid">
-      <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+      <%= submit_tag "Submit" %>
+      <%# submit_tag "Submit", class: "btn btn-primary btn-lg disabled" %>
     </div>
-  </form>
+  <% end %>
 </div>
-<%# <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> %>

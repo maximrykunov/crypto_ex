@@ -17,7 +17,7 @@ RSpec.describe Order, type: :model do
       end
 
       it 'when amount not present' do
-        order.amount = nil
+        order.send_amount = nil
         expect(order).not_to be_valid
       end
 

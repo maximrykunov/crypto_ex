@@ -1,0 +1,13 @@
+<% if @order.errors.any? %>
+  // Если есть ошибки, выводим их
+  <% @order.errors.full_messages.each do |msg| %>
+    alert("<%= msg %>");
+  <% end %>
+  // Обновляем ошибки на форму
+  document.getElementById('order_name').classList.add('is-invalid');
+  document.getElementById('order_name').nextElementSibling.innerHTML = "<%= @order.errors[:name].join(', ') %>";
+<% else %>
+  // Если ошибок нет, можно отправить успешное сообщение или перенаправить
+  alert("Пользователь успешно создан!");
+  window.location.href = "<%= users_path %>";
+<% end %>

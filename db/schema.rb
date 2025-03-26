@@ -22,9 +22,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_092836) do
     t.string "base_address", null: false
     t.string "quote_currency", null: false
     t.string "quote_address", null: false
-    t.decimal "amount", precision: 20, scale: 8, null: false
-    t.decimal "price", precision: 20, scale: 8
-    t.decimal "fee", precision: 20, scale: 8, default: "0.0"
+    t.decimal "send_amount", precision: 20, scale: 8, null: false
+    t.decimal "receive_amount", precision: 20, scale: 8, null: false
+    t.decimal "price", precision: 20, scale: 8, null: false
+    t.decimal "fee", precision: 20, scale: 8, null: false
+    t.decimal "miner_fee", precision: 20, scale: 8, null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
