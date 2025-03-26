@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  # allow_unauthenticated_access
   def new
     current_price = PriceService.call("USDT", "SBTC")
     @order = Order.new(
