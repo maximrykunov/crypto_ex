@@ -26,4 +26,21 @@
         td = @order.miner_fee
       tr
         td status
-        td = @order.status
+        td = status_badge(@order.status)
+
+  - if @order.order_transaction
+    h4 Transaction
+    table#basic-datatable.table.dt-responsive.nowrap.w-100
+      tbody
+        tr
+          td transaction
+          td = @order.order_transaction.id
+        tr
+          td txid
+          td = @order.order_transaction.txid
+        tr
+          td confirmations
+          td = @order.order_transaction.confirmations
+        tr
+          td retries
+          td = @order.order_transaction.retries
