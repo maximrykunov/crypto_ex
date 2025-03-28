@@ -8,7 +8,6 @@ class CheckTransactionService < ApplicationService
   end
 
   def call
-    p "===========CheckTransactionService===id:#{id}======================"
     transaction = Transaction.find_by(id: id)
 
     return :skip unless transaction
