@@ -1,0 +1,29 @@
+.container
+  h3 = "Order #{@order.id}"
+
+  table#basic-datatable.table.dt-responsive.nowrap.w-100
+    tbody
+      tr
+        td base_currency
+        td = @order.base_currency
+      tr
+        td quote_currency
+        td = @order.quote_currency
+      tr
+        td quote_address
+        td = @order.quote_address
+      tr
+        td send_amount
+        td = @order.send_amount
+      tr
+        td price
+        td = @order.price
+      tr
+        td fee
+        td = @order.fee
+      tr
+        td miner_fee
+        td = @order.miner_fee
+      tr
+        td status
+        td = @order.status

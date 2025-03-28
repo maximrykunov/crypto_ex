@@ -1,0 +1,21 @@
+.container
+  = "Hello, #{current_user.email_address}"
+
+  h3 Your orders
+
+  table#basic-datatable.table.dt-responsive.nowrap.w-100
+    thead
+      tr
+        th Order ID
+        th Send
+        th Receive
+        th Status
+        th
+    tbody
+      - current_user.orders.each do |order|
+        tr
+          td = order.id
+          td = "#{order.send_amount} #{order.base_currency}"
+          td = "#{order.receive_amount} #{order.quote_currency}"
+          td = order.status
+          td = link_to 'view', order_path(order)

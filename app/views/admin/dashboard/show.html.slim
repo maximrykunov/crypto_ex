@@ -1,0 +1,44 @@
+.container
+  h3 Admin Interface
+
+  h4 Statistics
+
+  table#basic-datatable.table.dt-responsive.nowrap.w-100
+    thead
+      tr
+        th Total exchange fee
+        th Total transactions
+        th Total success transactions
+    tbody
+      tr
+        td = @completed_orders_fee
+        |  SBTC
+        td = @completed_orders
+        td = @all_orders
+
+  h4 Orders
+
+  table#basic-datatable.table.dt-responsive.nowrap.w-100
+    thead
+      tr
+        th Order ID
+        th Date/Time
+        th User
+        th Tx ID
+        th Send
+        th Receive
+        th Exchange rate
+        th Exchange fee
+        th Status
+    - @orders.each do |order|
+      tbody
+        tr
+          td = order.id
+          td = l(order.created_at, format: :short)
+          td = order.user.email_address
+          td = order.id
+          td = "#{order.send_amount} #{order.base_currency}"
+          td = "#{order.receive_amount} #{order.quote_currency}"
+          td = order.price
+          td = order.fee
+          td = status_badge(order.status)
