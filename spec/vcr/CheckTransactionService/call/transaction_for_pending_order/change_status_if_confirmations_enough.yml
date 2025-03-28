@@ -1,0 +1,116 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://mempool.space/signet/api/tx/tx_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - mempool.space
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 28 Mar 2025 11:41:23 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Language
+      - Cookie
+      Cache-Control:
+      - no-cache
+      - public
+      X-Powered-By:
+      - mempool-electrs 3.2.0-dev-6cb9bec(dirty)
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 28 Mar 2025 11:41:22 GMT
+      Onion-Location:
+      - http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/signet/api/tx/bef8db7eab160458cb7893f924438669c04b4ed428248ec8df9d86ffe99beefc
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      Pragma:
+      - public
+    body:
+      encoding: ASCII-8BIT
+      string: '{"txid":"bef8db7eab160458cb7893f924438669c04b4ed428248ec8df9d86ffe99beefc","version":2,"locktime":241202,"vin":[{"txid":"0e16e49534e8f3e63368cc1bf3a7efc3cb6627e3fdfb86d5a5a45ea0350fba95","vout":8,"prevout":{"scriptpubkey":"0014d49941669778f24ab93a94396e3a9b14c6676150","scriptpubkey_asm":"OP_0
+        OP_PUSHBYTES_20 d49941669778f24ab93a94396e3a9b14c6676150","scriptpubkey_type":"v0_p2wpkh","scriptpubkey_address":"tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd","value":994370},"scriptsig":"","scriptsig_asm":"","witness":["304402202c1d785a45a6e9a3683a26465e256f431d03878eac9de79cdba8946130af02b0022073a10964405acf321a6afb955d97c84dd43b6dc8095564580cbddc5535644c3901","02b351ab400d8b55c911b6f9f3497f5f44387111fc5f0aae760f02d7135333063b"],"is_coinbase":false,"sequence":4294967293},{"txid":"af261be0feaa03cd5b9226b39b42761d01d9c8cc342610866dc268c593486a7a","vout":599,"prevout":{"scriptpubkey":"0014d49941669778f24ab93a94396e3a9b14c6676150","scriptpubkey_asm":"OP_0
+        OP_PUSHBYTES_20 d49941669778f24ab93a94396e3a9b14c6676150","scriptpubkey_type":"v0_p2wpkh","scriptpubkey_address":"tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd","value":196884},"scriptsig":"","scriptsig_asm":"","witness":["304402201f855928600616054a7197402026bcf14de3ac0b5b32ec927bad4213666bb8dd0220076790927fcd7b0a50d6c7fe011923c845f251c2b938246da5a3a309bc2fb5e101","02b351ab400d8b55c911b6f9f3497f5f44387111fc5f0aae760f02d7135333063b"],"is_coinbase":false,"sequence":4294967293}],"vout":[{"scriptpubkey":"0014c93d5a48749f1daad9c4d9b70de40044740f42c1","scriptpubkey_asm":"OP_0
+        OP_PUSHBYTES_20 c93d5a48749f1daad9c4d9b70de40044740f42c1","scriptpubkey_type":"v0_p2wpkh","scriptpubkey_address":"tb1qey745jr5nuw64kwymxmsmeqqg36q7skpckrczm","value":20000},{"scriptpubkey":"0014ba98a2101525dcd2d62e86b3afc2b68bdafaa4e5","scriptpubkey_asm":"OP_0
+        OP_PUSHBYTES_20 ba98a2101525dcd2d62e86b3afc2b68bdafaa4e5","scriptpubkey_type":"v0_p2wpkh","scriptpubkey_address":"tb1qh2v2yyq4yhwd943ws6e6ls4k30d04f89na3dlj","value":1171000}],"size":370,"weight":832,"sigops":2,"fee":254,"status":{"confirmed":true,"block_height":241203,"block_hash":"0000001a04eb8dabe350ef61e568f86efa3fb757d86745ce1a6ccb0d8e27b4e6","block_time":1743070686}}'
+  recorded_at: Fri, 28 Mar 2025 11:41:23 GMT
+- request:
+    method: get
+    uri: https://mempool.space/signet/api/blocks/tip/height
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - mempool.space
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 28 Mar 2025 11:41:24 GMT
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '6'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      - public
+      X-Powered-By:
+      - mempool-electrs 3.2.0-dev-6cb9bec(dirty)
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 28 Mar 2025 11:41:23 GMT
+      Onion-Location:
+      - http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/signet/api/blocks/tip/height
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      Pragma:
+      - public
+      Vary:
+      - Accept-Language
+      - Cookie
+    body:
+      encoding: UTF-8
+      string: '241360'
+  recorded_at: Fri, 28 Mar 2025 11:41:24 GMT
+recorded_with: VCR 6.3.1

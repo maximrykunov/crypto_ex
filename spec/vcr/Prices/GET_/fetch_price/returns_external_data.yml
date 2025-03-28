@@ -29,7 +29,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 26 Mar 2025 14:40:39 GMT
+      - Fri, 28 Mar 2025 11:23:42 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains
       Server:
@@ -52,14 +52,14 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 8c8084716542b7132c319aa80cffeee6.cloudfront.net (CloudFront)
+      - 1.1 d8e6d5a84eb26ff3b7d1801d7337b390.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DUB56-P1
       X-Amz-Cf-Id:
-      - 3_U4skaEfPa4BSbe8RWCXv2HPMPVibVvvNGl1sk7E818zWAUcRg-_g==
+      - ZfhzJs6lay0CI7MUO6ZzkkTfSVsdEx55veLqgNunzD3f5no2TzVoww==
     body:
       encoding: ASCII-8BIT
-      string: '{"status":{"timestamp":"2025-03-26T14:40:39.855Z","error_code":0,"error_message":null,"elapsed":24,"credit_count":1,"notice":null},"data":{"id":825,"symbol":"USDT","name":"Tether
-        USDt","amount":1,"last_updated":"2025-03-26T14:38:00.000Z","quote":{"SBTC":{"price":5.2956850152251,"last_updated":"2025-03-26T14:40:00.000Z"}}}}'
-  recorded_at: Wed, 26 Mar 2025 14:40:39 GMT
+      string: '{"status":{"timestamp":"2025-03-28T11:23:42.176Z","error_code":0,"error_message":null,"elapsed":46,"credit_count":1,"notice":null},"data":{"id":825,"symbol":"USDT","name":"Tether
+        USDt","amount":1,"last_updated":"2025-03-28T11:21:00.000Z","quote":{"SBTC":{"price":5.293372553889523,"last_updated":"2025-03-28T11:23:00.000Z"}}}}'
+  recorded_at: Fri, 28 Mar 2025 11:23:42 GMT
 recorded_with: VCR 6.3.1

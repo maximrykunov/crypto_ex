@@ -4,6 +4,8 @@ quote_currencies: [SBTC]
 commision_rate: 0.03
 miner_fee: 0.000006
 block_price: true
+explorer_url: https://mempool.space/signet
+min_confirmations: 6
 
 coinmarketcap:
   api_key: a4ebc6c6-2198-4664-8473-c7b92cdd9239

@@ -7,7 +7,7 @@ RSpec.describe "Prices", type: :request do
 
       get "/prices/fetch_price"
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)["price"]).to eq(5.29568502)
+      expect(JSON.parse(response.body)["price"]).to eq(5.29337255)
     end
 
     it "returns stub data" do
