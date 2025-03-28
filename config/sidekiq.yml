@@ -1,0 +1,10 @@
+:concurrency: 5
+:queues:
+  - default
+  - mailers
+
+:scheduler:
+  :schedule:
+    check_transaction_worker:
+      cron: "*/2 * * * *"  # Каждые 2 минуты
+      class: "PendingOrderWorker"

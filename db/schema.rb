@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_102803) do
     t.bigint "order_id", null: false
     t.string "txid"
     t.integer "confirmations", default: 0
+    t.integer "retries", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_transactions_on_order_id"

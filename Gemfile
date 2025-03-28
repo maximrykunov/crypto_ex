@@ -41,6 +41,8 @@ gem "thruster", require: false
 
 gem "config"
 gem "bitcoinrb"
+gem "sidekiq"
+gem "sidekiq-scheduler"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -63,6 +65,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "annotate"
 end
 
 group :test do

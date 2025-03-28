@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   attr_accessor :i_agree_kyc
 
   belongs_to :user
+  has_one :order_transaction, class_name: 'Transaction', dependent: :destroy
 
   enum :order_type, [ :limit ], prefix: true
   enum :order_side, [ :exchange ]

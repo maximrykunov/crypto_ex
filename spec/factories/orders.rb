@@ -12,5 +12,9 @@ FactoryBot.define do
     fee { 2.01 }
     miner_fee { 0.000006 }
     price { 5.05 }
+
+    trait :with_transaction do
+      association :order_transaction, factory: :transaction
+    end
   end
 end

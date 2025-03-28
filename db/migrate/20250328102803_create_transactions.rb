@@ -4,6 +4,7 @@ class CreateTransactions < ActiveRecord::Migration[8.0]
       t.references :order, null: false, foreign_key: true
       t.string :txid, index: true
       t.integer :confirmations, default: 0
+      t.integer :retries, default: 0
 
       t.timestamps
     end

@@ -44,5 +44,14 @@ end
     status: rand(0..2)
   }
 
-  Order.create!(attributes)
+  order = Order.create!(attributes)
+
+  tx_attributes = {
+    order_id: order.id,
+    txid: SecureRandom.hex,
+    confirmations: order.completed? ? 10 : 0,
+    retries: order.cancelled? ? 10 : 0
+  }
+
+  Transaction.create!(tx_attributes)
 end

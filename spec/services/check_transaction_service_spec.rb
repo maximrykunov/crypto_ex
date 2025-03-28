@@ -27,18 +27,38 @@ describe CheckTransactionService do
       let(:transaction) { create(:transaction, order: order) }
       let(:transaction_id) { transaction.id }
 
-      it 'do not change status if confirmations too small', vcr: true do
-        expect(subject).to eq :pending
+      context 'transaction for pending order with less than 10 retries' do
+        it 'do not change status if confirmations too small', vcr: true do
+          expect(subject).to eq :pending
 
-        expect(transaction.reload.confirmations).to eq 3
-        expect(order.reload.status).to eq 'pending'
+          expect(transaction.reload.confirmations).to eq 3
+          expect(order.reload.status).to eq 'pending'
+        end
+
+        it 'change status if confirmations enough', vcr: true do
+          expect(subject).to eq :completed
+
+          expect(transaction.reload.confirmations).to eq 158
+          expect(order.reload.status).to eq 'completed'
+        end
+
+        it 'increase retries if get error', vcr: true do
+          expect(subject).to eq :pending
+
+          expect(transaction.reload.retries).to eq 1
+          expect(order.reload.status).to eq 'pending'
+        end
       end
 
-      it 'change status if confirmations enough', vcr: true do
-        expect(subject).to eq :completed
+      context 'transaction for pending order with 10 retries' do
+        let(:transaction) { create(:transaction, order: order, retries: 10) }
 
-        expect(transaction.reload.confirmations).to eq 158
-        expect(order.reload.status).to eq 'completed'
+        it 'change status if confirmations enough' do
+          expect(subject).to eq :cancelled
+
+          expect(transaction.reload.retries).to eq 10
+          expect(order.reload.status).to eq 'cancelled'
+        end
       end
     end
   end
