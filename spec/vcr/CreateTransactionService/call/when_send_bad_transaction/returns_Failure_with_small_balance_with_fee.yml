@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://explorer.bc-2.jp/api/address/tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd/utxo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - explorer.bc-2.jp
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 30 Mar 2025 17:54:57 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - public, max-age=10
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - 928979a17bb11b9c-DUB
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"txid":"7583f38145b75fafea7c67dfe9d901295ca24c433e318de2602337fe65b42770","vout":1,"status":{"confirmed":true,"block_height":241686,"block_hash":"0000008693a023c027bb20f97493351e9918db34360aa670ae82fb984100b4c0","block_time":1743354555},"value":157450},{"txid":"e925a3de8c477c7181a0200c0869afc7645e7a4430f075d9f98339c00406f139","vout":169,"status":{"confirmed":true,"block_height":241679,"block_hash":"00000023da10360f8c2abb9bec10500ec7a4f0703a3206e3597536bd98ab2ce6","block_time":1743350341},"value":1189524}]'
+  recorded_at: Sun, 30 Mar 2025 17:54:56 GMT
+- request:
+    method: post
+    uri: https://mempool.space/signet/api/tx
+    body:
+      encoding: UTF-8
+      string: 010000000001011d3e23034afb6761f3c232c5ae8e275e0640082149a16579b8d1385494a5e197eb01000000ffffffff021027000000000000160014c93d5a48749f1daad9c4d9b70de40044740f42c13271020000000000160014d49941669778f24ab93a94396e3a9b14c66761500247304402201541736ac3136311552e749c2032e2045bec3c2d985b17539b3aabd81c737aab02202bbfb271e670f4ff10cdad9b96eebca98ecdd571e14b91b24af58904b5a6fe1d012102b351ab400d8b55c911b6f9f3497f5f44387111fc5f0aae760f02d7135333063b00000000
+    headers:
+      Content-Type:
+      - text/plain
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - mempool.space
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 30 Mar 2025 17:54:58 GMT
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '85'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - mempool-electrs 3.2.0-dev-6cb9bec
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: 'sendrawtransaction RPC error: {"code":-25,"message":"bad-txns-inputs-missingorspent"}'
+  recorded_at: Sun, 30 Mar 2025 17:54:57 GMT
+recorded_with: VCR 6.3.1

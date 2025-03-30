@@ -4,9 +4,9 @@ class OrdersController < ApplicationController
     @order = Order.new(
       send_amount: 28.51,
       base_currency: Settings.base_currencies.first,
-      base_address: Settings.usdt_wallet,
+      base_address: Settings.sbtc_wallet,
       quote_currency: Settings.quote_currencies.first,
-      quote_address: "bc1qar0srrr8c4xywcrvdp7rkxw7y4f55q9k0pmd4d",
+      quote_address: "tb1qey745jr5nuw64kwymxmsmeqqg36q7skpckrczm",
       price: current_price[:price]
     )
   end
@@ -20,8 +20,9 @@ class OrdersController < ApplicationController
     @order = Order.new(prepared_params)
 
     if @order.save
+      CreateOrderTransactionWorker.perform_async(@order.id)
       respond_to do |format|
-        format.html { redirect_to order_path(@order), notice: "Пользователь создан." }
+        format.html { redirect_to order_path(@order), notice: "Ордер создан." }
         format.js   # ищет create.js.erb
       end
     else

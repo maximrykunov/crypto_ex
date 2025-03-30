@@ -1,4 +1,5 @@
 usdt_wallet: ec30dd04139f94114ddb5b08bbed06d3
+sbtc_wallet: tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd
 base_currencies: [USDT]
 quote_currencies: [SBTC]
 commision_rate: 0.03
@@ -7,6 +8,7 @@ block_price: true
 explorer_url: https://mempool.space/signet
 min_confirmations: 6
 max_retries: 10
+private_key_wif: 'cR81pe6xuZJqu8r1iJzQeXKz7HAGmCibkquyAywZV19bZCw4newH'
 
 coinmarketcap:
   api_key: a4ebc6c6-2198-4664-8473-c7b92cdd9239

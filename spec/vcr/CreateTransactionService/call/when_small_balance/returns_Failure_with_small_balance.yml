@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://explorer.bc-2.jp/api/address/tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd/utxo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - explorer.bc-2.jp
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 30 Mar 2025 17:41:16 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - public, max-age=10
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - 9289659b4a39c1d8-DUB
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"txid":"7583f38145b75fafea7c67dfe9d901295ca24c433e318de2602337fe65b42770","vout":1,"status":{"confirmed":true,"block_height":241686,"block_hash":"0000008693a023c027bb20f97493351e9918db34360aa670ae82fb984100b4c0","block_time":1743354555},"value":157450},{"txid":"e925a3de8c477c7181a0200c0869afc7645e7a4430f075d9f98339c00406f139","vout":169,"status":{"confirmed":true,"block_height":241679,"block_hash":"00000023da10360f8c2abb9bec10500ec7a4f0703a3206e3597536bd98ab2ce6","block_time":1743350341},"value":1189524}]'
+  recorded_at: Sun, 30 Mar 2025 17:41:16 GMT
+recorded_with: VCR 6.3.1

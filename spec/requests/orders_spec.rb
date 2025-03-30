@@ -33,9 +33,18 @@ RSpec.describe "Orders", type: :request do
       }
     end
 
+    before do
+      allow(CreateOrderTransactionWorker).to receive(:perform_async)
+    end
+
     it "returns http success" do
       post "/orders", params: params
       expect(response).to have_http_status(302)
+    end
+
+    it "call CreateOrderTransactionWorker" do
+      post "/orders", params: params
+      expect(CreateOrderTransactionWorker).to have_received(:perform_async)
     end
   end
 

@@ -140,17 +140,19 @@ GEM
     diff-lcs (1.6.1)
     dotenv (3.1.7)
     drb (2.2.1)
+    dry-core (1.1.0)
+      concurrent-ruby (~> 1.0)
+      logger
+      zeitwerk (~> 2.6)
+    dry-monads (1.8.2)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.1)
+      zeitwerk (~> 2.6)
     ecdsa (1.2.0)
     ecdsa_ext (0.5.1)
       ecdsa (~> 1.2.0)
     ed25519 (1.3.0)
-    erb2slim (0.0.1)
-      erubis
-      haml
-      haml2slim
-      hpricot
     erubi (1.13.1)
-    erubis (2.7.0)
     et-orbi (1.2.11)
       tzinfo
     eventmachine (1.2.7)
@@ -168,16 +170,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (6.3.0)
-      temple (>= 0.8.2)
-      thor
-      tilt
-    haml2slim (0.4.7)
-      haml (>= 3.0)
-      nokogiri
-      ruby_parser
     hashdiff (1.1.2)
-    hpricot (0.8.6)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     iniparse (1.5.0)
@@ -367,9 +360,6 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
-    ruby_parser (3.21.1)
-      racc (~> 1.5)
-      sexp_processor (~> 4.16)
     rubyzip (2.4.1)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
@@ -382,7 +372,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sexp_processor (4.17.3)
     sidekiq (7.3.9)
       base64
       connection_pool (>= 2.3.0)
@@ -488,7 +477,7 @@ DEPENDENCIES
   config
   cssbundling-rails
   debug
-  erb2slim
+  dry-monads
   factory_bot_rails
   faker
   jbuilder

@@ -6,6 +6,7 @@
 #  base_address   :string           not null
 #  base_currency  :string           not null
 #  fee            :decimal(20, 8)   not null
+#  message        :string
 #  miner_fee      :decimal(20, 8)   not null
 #  order_side     :integer          default("exchange"), not null
 #  order_type     :integer          default("limit"), not null

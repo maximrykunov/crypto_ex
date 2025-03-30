@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://explorer.bc-2.jp/api/address/tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd/utxo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - explorer.bc-2.jp
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 30 Mar 2025 18:10:13 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - public, max-age=10
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Y8MU1CXLVvMl8jb1yBCSpFZmToFRlgvJqFNIo4wEQO04BqIDoWLWC4g5CSx59PTlfWY5E1%2FPGK7l3jck2kEQYi14P98EgnhG9iOCjvKY%2FXtHibZzAwhv%2FzmhqdYdXyInSYuN"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 928990030ab756f0-DUB
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Server-Timing:
+      - cfL4;desc="?proto=TCP&rtt=62662&min_rtt=61746&rtt_var=13590&sent=5&recv=8&lost=0&retrans=0&sent_bytes=2783&recv_bytes=803&delivery_rate=65790&cwnd=221&unsent_bytes=0&cid=6309bf0cb7282659&ts=281&x=0"
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"txid":"e925a3de8c477c7181a0200c0869afc7645e7a4430f075d9f98339c00406f139","vout":169,"status":{"confirmed":true,"block_height":241679,"block_hash":"00000023da10360f8c2abb9bec10500ec7a4f0703a3206e3597536bd98ab2ce6","block_time":1743350341},"value":1189524},{"txid":"7583f38145b75fafea7c67dfe9d901295ca24c433e318de2602337fe65b42770","vout":1,"status":{"confirmed":true,"block_height":241686,"block_hash":"0000008693a023c027bb20f97493351e9918db34360aa670ae82fb984100b4c0","block_time":1743354555},"value":157450}]'
+  recorded_at: Sun, 30 Mar 2025 18:10:13 GMT
+- request:
+    method: post
+    uri: https://mempool.space/signet/api/tx
+    body:
+      encoding: US-ASCII
+      string: 020000000001017027b465fe372360e28d313e434ca25c2901d9e9df677ceaaf5fb74581f383750100000000ffffffff02d007000000000000160014c93d5a48749f1daad9c4d9b70de40044740f42c1e25c020000000000160014d49941669778f24ab93a94396e3a9b14c6676150024730440220134ee88c3547a2c758ea709b19061f732f578a1907f8c357edef380ea6d336cd02201183d7fb393d111c66d9943299f5ce6674df083cd5c473eefbb9e26795465cab012102b351ab400d8b55c911b6f9f3497f5f44387111fc5f0aae760f02d7135333063b00000000
+    headers:
+      Content-Type:
+      - text/plain
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - mempool.space
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 30 Mar 2025 18:10:14 GMT
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '64'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-cache
+      - public
+      X-Powered-By:
+      - mempool-electrs 3.2.0-dev-6cb9bec
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 30 Mar 2025 18:10:13 GMT
+      Onion-Location:
+      - http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/signet/api/tx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      Pragma:
+      - public
+      Vary:
+      - Accept-Language
+      - Cookie
+    body:
+      encoding: UTF-8
+      string: e61c0c19ad3c03409cdd7988a8c12c4986673b47d28cbc9ceeba0fb99a4c3da8
+  recorded_at: Sun, 30 Mar 2025 18:10:14 GMT
+recorded_with: VCR 6.3.1

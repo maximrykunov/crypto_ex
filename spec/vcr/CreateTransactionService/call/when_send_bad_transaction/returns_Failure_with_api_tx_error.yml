@@ -1,0 +1,94 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://explorer.bc-2.jp/api/address/tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd/utxo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - explorer.bc-2.jp
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 30 Mar 2025 18:13:30 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - public, max-age=10
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=oWM7UmOsnoW2xfbFEKCs2u39HbM2o3MjNPxXVZtLwntg9r1KisqvUOVvvQ8jcuVs3wzhpMIalMccEVcyR%2FQDJ4GRANB3KWqBGkP7gbN94g0VIqggxqb%2BHFV42Um5Gj0kifK7"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 928994d27f19bdfa-DUB
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Server-Timing:
+      - cfL4;desc="?proto=TCP&rtt=60709&min_rtt=60519&rtt_var=17352&sent=5&recv=7&lost=0&retrans=0&sent_bytes=2783&recv_bytes=803&delivery_rate=66901&cwnd=242&unsent_bytes=0&cid=7e0d77e142cdfbf5&ts=256&x=0"
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"txid":"e925a3de8c477c7181a0200c0869afc7645e7a4430f075d9f98339c00406f139","vout":169,"status":{"confirmed":true,"block_height":241679,"block_hash":"00000023da10360f8c2abb9bec10500ec7a4f0703a3206e3597536bd98ab2ce6","block_time":1743350341},"value":1189524},{"txid":"426bd20bbd7dd2ab2ff458d50e96094e2c1aa80acd9e1ba48c66bd9c6d83002b","vout":1,"status":{"confirmed":false},"value":152250}]'
+  recorded_at: Sun, 30 Mar 2025 18:13:30 GMT
+- request:
+    method: post
+    uri: https://mempool.space/signet/api/tx
+    body:
+      encoding: UTF-8
+      string: tx.to_payload.bth
+    headers:
+      Content-Type:
+      - text/plain
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - mempool.space
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 30 Mar 2025 18:13:31 GMT
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '113'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - mempool-electrs 3.2.0-dev-6cb9bec
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: 'sendrawtransaction RPC error: {"code":-22,"message":"TX decode failed.
+        Make sure the tx has at least one input."}'
+  recorded_at: Sun, 30 Mar 2025 18:13:31 GMT
+recorded_with: VCR 6.3.1
