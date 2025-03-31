@@ -28,14 +28,14 @@ describe CheckTransactionService do
       let(:transaction_id) { transaction.id }
 
       context 'transaction for pending order with less than 10 retries' do
-        it 'do not change status if confirmations too small', vcr: true do
+        it 'do not change status if confirmed is false', vcr: true do
           expect(subject).to eq :pending
 
           expect(transaction.reload.confirmations).to eq 3
           expect(order.reload.status).to eq 'pending'
         end
 
-        it 'change status if confirmations enough', vcr: true do
+        it 'change status if confirmed is true', vcr: true do
           expect(subject).to eq :completed
 
           expect(transaction.reload.confirmations).to eq 158

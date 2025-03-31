@@ -26,7 +26,7 @@ class CheckTransactionService < ApplicationService
 
       :completed
     else
-      transaction.update(confirmations:, retries: transaction.retries + 1)
+      transaction.update(confirmations: confirmation_result[:confirmations], retries: transaction.retries + 1)
 
       :pending
     end
@@ -44,7 +44,7 @@ class CheckTransactionService < ApplicationService
       tx_response = Net::HTTP.get(tx_url)
       tx_data = JSON.parse(tx_response)
 
-      # метод с вычисленим блока не 
+      # метод с вычисленим блока не
       block_height = tx_data.dig("status", "block_height")
 
       # Получаем текущую высоту блока
@@ -53,12 +53,12 @@ class CheckTransactionService < ApplicationService
       current_height = block_response.to_i
 
       confirmations = block_height ? (current_height - block_height + 1) : 0
-      confirmed = tx_data['status']['confirmed']
+      confirmed = tx_data["status"]["confirmed"]
     rescue => e
       Rails.logger.error("CheckTransactionService #{id}: #{e.message}")
       confirmations = 0
     end
 
-    {confirmed:, confirmations:}
+    { confirmed:, confirmations: }
   end
 end
