@@ -37,7 +37,9 @@
           td = @order.order_transaction.id
         tr
           td txid
-          td = @order.order_transaction.txid
+          td
+            = @order.order_transaction.txid
+            = link_to 'view', "#{Settings.explorer_url}/api/tx/#{@order.order_transaction.txid}", target: '_blank', style: 'margin-left: 10px;'
         tr
           td confirmations
           td = @order.order_transaction.confirmations

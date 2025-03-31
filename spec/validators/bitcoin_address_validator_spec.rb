@@ -8,7 +8,6 @@ require "rails_helper"
 # end
 
 RSpec.describe BitcoinAddressValidator do
-
   subject { build(:order) }
 
   context "with valid addresses" do
