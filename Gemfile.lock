@@ -470,6 +470,7 @@ PLATFORMS
 DEPENDENCIES
   annotaterb
   bcrypt (~> 3.1.7)
+  bech32
   bitcoinrb
   bootsnap
   brakeman

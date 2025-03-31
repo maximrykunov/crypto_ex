@@ -18,7 +18,7 @@ RSpec.describe "Orders", type: :request do
     let(:send_amount) { 12 }
     let(:base_currency) { 'USDT' }
     let(:quote_currency) { 'SBTC' }
-    let(:quote_address) { 'bc1qar0srrr8c4xywcrvdp7rkxw7y4f55q9k0pmd4d' }
+    let(:quote_address) { 'tb1qey745jr5nuw64kwymxmsmeqqg36q7skpckrczm' }
     let(:price) { 5.23 }
     let(:params) do
       {

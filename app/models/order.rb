@@ -44,13 +44,13 @@ class Order < ApplicationRecord
   validates :base_currency, presence: true, inclusion: { in: Settings.base_currencies }
   validates :base_address, presence: true
   validates :quote_currency, presence: true, inclusion: { in: Settings.quote_currencies }
-  validates :quote_address, presence: true
+  validates :quote_address, presence: true, bitcoin_address: true
   validates :send_amount, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 30  }
   validates :price, presence: true, numericality: { greater_than: 0 }, if: -> { order_type_limit? }
   validates :receive_amount, presence: true, numericality: { greater_than: 0 }
   validates :i_agree_kyc, acceptance: { accept: "true", message: "You must agree to the terms" }
 
-  validate :valid_quote_address
+  # validate :valid_quote_address
 
   private
 

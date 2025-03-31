@@ -36,7 +36,7 @@ FactoryBot.define do
     base_currency { 'USDT' }
     base_address { Settings.usdt_wallet }
     quote_currency { 'SBTC' }
-    quote_address { 'bc1qar0srrr8c4xywcrvdp7rkxw7y4f55q9k0pmd4d' }
+    quote_address { 'tb1qey745jr5nuw64kwymxmsmeqqg36q7skpckrczm' }
     send_amount { 15.505 }
     receive_amount { 60.303 }
     fee { 2.01 }

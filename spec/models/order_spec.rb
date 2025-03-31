@@ -60,6 +60,11 @@ RSpec.describe Order, type: :model do
         order.quote_currency = nil
         expect(order).not_to be_valid
       end
+
+      it 'when quote_currency not valid' do
+        order.quote_currency = "tb1qey745jr5nuw64kwymxmsmeqqg36q7skpckrczm-"
+        expect(order).not_to be_valid
+      end
     end
   end
 end
