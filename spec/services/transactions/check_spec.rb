@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe CheckTransactionService do
-  subject { CheckTransactionService.call(transaction_id) }
+RSpec.describe Transactions::Check do
+  subject { described_class.call(transaction_id) }
 
   context 'call' do
     context 'undefined transaction' do

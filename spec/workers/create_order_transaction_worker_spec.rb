@@ -29,9 +29,9 @@ RSpec.describe CreateOrderTransactionWorker, type: :worker do
       end
     end
 
-    context 'when CreateTransactionService fails' do
+    context 'when Transactions::Create fails' do
       it 'updates order status to cancelled' do
-        allow(CreateTransactionService).to receive(:call).and_return(Dry::Monads::Result::Failure.new([ :api_error, 'anything' ]))
+        allow(Transactions::Create).to receive(:call).and_return(Dry::Monads::Result::Failure.new([ :api_error, 'anything' ]))
 
         subject.perform(order.id)
 
@@ -40,9 +40,9 @@ RSpec.describe CreateOrderTransactionWorker, type: :worker do
       end
     end
 
-    context 'when CreateTransactionService succeeds' do
+    context 'when Transactions::Create succeeds' do
       it 'creates a transaction' do
-        allow(CreateTransactionService).to receive(:call).and_return(Dry::Monads::Result::Success.new('txid123'))
+        allow(Transactions::Create).to receive(:call).and_return(Dry::Monads::Result::Success.new('txid123'))
         allow(Transaction).to receive(:create!).and_return(double(:transaction))
 
         expect(Transaction).to receive(:create!).with(order_id: order.id, txid: 'txid123')

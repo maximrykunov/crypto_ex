@@ -8,7 +8,7 @@ class CreateOrderTransactionWorker
     return :skip unless order.pending?
     return :skip if order.order_transaction
 
-    result = CreateTransactionService.call(Settings.sbtc_wallet, order.quote_address, order.send_amount)
+    result = Transactions::Create.call(Settings.sbtc_wallet, order.quote_address, order.send_amount)
 
     if result.failure?
       order.update(message: result.failure.to_s, status: :cancelled)

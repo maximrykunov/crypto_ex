@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe CreateTransactionService do
-  subject { CreateTransactionService.call(sender_address, recipient_address, amount) }
+RSpec.describe Transactions::Create do
+  subject { described_class.call(sender_address, recipient_address, amount) }
 
   context 'call' do
     let(:sender_address) { 'tb1q6jv5ze5h0rey4wf6jsukuw5mznrxwc2sxnexgd' }
