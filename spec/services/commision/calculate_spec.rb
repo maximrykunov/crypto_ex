@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe CommisionService do
+RSpec.describe Commision::Calculate do
   context 'call' do
     let(:send_amount) { '12.445' }
     let(:price) { '5.234567' }
 
     it 'calculate' do
-      result = CommisionService.call(send_amount, price)
+      result = described_class.call(send_amount, price)
 
       expect(result[:fee]).to eq 1.95432559
       expect(result[:miner_fee]).to eq 0.000006

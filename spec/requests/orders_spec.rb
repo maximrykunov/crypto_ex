@@ -14,7 +14,7 @@ RSpec.describe "Orders", type: :request do
     end
   end
 
-  describe "GET /create" do
+  describe "POST /create" do
     let(:send_amount) { 12 }
     let(:base_currency) { 'USDT' }
     let(:quote_currency) { 'SBTC' }
@@ -37,14 +37,39 @@ RSpec.describe "Orders", type: :request do
       allow(CreateOrderTransactionWorker).to receive(:perform_async)
     end
 
-    it "returns http success" do
-      post "/orders", params: params
-      expect(response).to have_http_status(302)
+    context "with valid params" do
+      it "creates order and redirects to show page" do
+        expect {
+          post "/orders", params: params
+        }.to change(Order, :count).by(1)
+
+        expect(response).to redirect_to(order_path(Order.last))
+        expect(flash[:notice]).to eq("Ордер создан.")
+        expect(CreateOrderTransactionWorker).to have_received(:perform_async).with(Order.last.id)
+      end
     end
 
-    it "call CreateOrderTransactionWorker" do
-      post "/orders", params: params
-      expect(CreateOrderTransactionWorker).to have_received(:perform_async)
+    context "with invalid params" do
+      let(:params) do
+        {
+          order: {
+            send_amount: -1,
+            base_currency:,
+            quote_currency:,
+            quote_address:,
+            price:,
+            i_agree_kyc: true
+          }
+        }
+      end
+
+      it "does not create order and renders new template" do
+        expect {
+          post "/orders", params: params
+        }.not_to change(Order, :count)
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 
@@ -59,7 +84,7 @@ RSpec.describe "Orders", type: :request do
     end
 
     context 'invalid order' do
-      it "returns http success" do
+      it "returns http not found" do
         get "/orders/0"
         expect(response).to have_http_status(:not_found)
       end

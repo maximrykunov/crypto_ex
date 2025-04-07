@@ -2,6 +2,12 @@
 
 .container.px-5.my-5 data-controller="order" data-action="connect->order#updateTotal"
   h2 New Exchange
+  hr
+  .container
+    = @order.inspect
+  .container
+    = @order.errors.inspect
+  hr
   = form_with model: @order, url: orders_path, method: :post, remote: true do |f|
     = hidden_field_tag 'order[base_address]', @order[:base_address]
     = hidden_field_tag 'order[price]', @order[:price], data: { order_target: 'price' }

@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  include Dry::Monads[:result]
+
   def new
     current_price = PriceService.call("USDT", "SBTC")
     @order = Order.new(
@@ -16,20 +18,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    prepared_params = prepare_params(order_params)
-    @order = Order.new(prepared_params)
+    result = Orders::Create.new.call(order_params, current_user)
 
-    if @order.save
-      CreateOrderTransactionWorker.perform_async(@order.id)
-      respond_to do |format|
-        format.html { redirect_to order_path(@order), notice: "Ордер создан." }
-        format.js   # ищет create.js.erb
-      end
-    else
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
-        format.js   # ищет create.js.erb для обработки ошибок
-      end
+    case result
+    in Success(order)
+      redirect_to order_path(order), notice: "Ордер создан."
+    in Failure(order)
+      @order = order
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -38,19 +34,5 @@ class OrdersController < ApplicationController
   def order_params
     params[:order][:i_agree_kyc] ||= false
     params.require(:order).permit(:send_amount, :base_currency, :base_address, :quote_currency, :quote_address, :price, :i_agree_kyc)
-  end
-
-  def prepare_params(params)
-    commision = CommisionService.call(params[:send_amount], params[:price])
-    params.merge(
-      {
-        user: current_user,
-        base_address: Settings.usdt_wallet,
-        send_amount: commision[:send_amount],
-        receive_amount: commision[:receive_amount],
-        fee: commision[:fee],
-        miner_fee: commision[:miner_fee],
-        price: commision[:price]
-      })
   end
 end
